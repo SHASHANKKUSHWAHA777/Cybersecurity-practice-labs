@@ -1,0 +1,30 @@
+first do a nmap of website ip 
+then gobuster for mapping all tis directories
+then curl to know what eachd dir does
+
+IDOR se agar url parameter me id change krke ham kisi dusre ka account ya profile ya dashboard access krlete hai to fir inspect me jaake session id uthalo , fir uska account kahi se bhi kisi device se bhi login ho skta h without credentials, ya fir vo session id pe curl maardo to info ajaegi andar ki
+
+
+took over the sara mitchell(admin) account by the weak pass reset methodology
+the reset code was displayed over the screen,it should be sent to the user email
+and that too was 6 digit code , any random no. from 000000 to 9999999 , anyone who  bruteforce the reset code
+no rate limiting , unlimited chances to generate reset code
+
+there was a reset url , i entered the admin email which i got to know thru idor , then i reset the pass ,and loginned by email and new pass
+
+
+rce and reverse shell was amazing 
+for rce just write a php code that if url parameter has cmd , execute the commands using GET , then upload it on the site as a .phtml file and then curl in your terminal the url parameters and use cmd param to write the command to be executed 
+example curl "http/::ip?cmd="hostname" and ul get the hostname on the terminal
+
+
+then in reverse shell , listen on port 444 on that web ip , and in another terminal trigger the reverse shell thru web shell by url encoding the payload in webshell cmd
+then boom u got reverse shell , a whole terminal to explore the entire compromised system
+
+
+attack chain 
+Enumeration: We discovered the application's technology stack (Apache, PHP, MySQL), its directory structure, an API endpoint, a password reset page, an uploads directory, and an admin panel.
+IDOR (Task 3): The /profile.php?id= parameter and the /api/user?id= endpoint allowed us to enumerate all users, including the administrator's name and email address.
+Weak Password Reset (Task 4): The reset mechanism displayed tokens directly in the HTTP response, allowing us to generate a token for the administrator and change her password.
+Admin Panel Access (Task 5): Using the compromised administrator account, we accessed the admin panel and found a file upload function with an incomplete extension blocklist.
+Remote Code Execution (Task 6):  We uploaded a PHP web shell using the .phtml extension, which bypassed the filter. This gave us command execution on the server and a path to a full reverse shell.
