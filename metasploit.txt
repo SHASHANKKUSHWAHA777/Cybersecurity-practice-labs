@@ -1,0 +1,32 @@
+Typical Metasploit Workflow
+Auxiliary
+      ↓
+Scan Target
+      ↓
+Find Vulnerability
+      ↓
+Choose Exploit
+      ↓
+Select Payload
+      ↓
+Run Exploit
+      ↓
+Get Shell / Meterpreter
+      ↓
+Post Exploitation
+
+
+
+
+Term	Meaning
+Vulnerability - Weakness
+Exploit -	Uses the weakness
+Payload -	Executes on the target
+Auxiliary -	Scan & Enumeration
+Post -	Actions after compromise
+Encoder -	Encodes payload
+Evasion -	Attempts to bypass AV/EDR
+NOP	- No Operation instruction
+Single -	One complete payload (_)
+Staged	- Loader + Second Stage (/)
+Meterpreter	- Advanced interactive shell
